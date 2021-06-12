@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+   <div id="app">
+       <!-- 
+           v-for
+
+           v-for is a directive that allows us to itterate over
+           a array / collection of some sort and create markup 
+           to then be put on the DOM
+        -->
+        <div>
+            <h2>Names</h2>
+            <ul>
+                <li v-for="name in names">
+                    {{ name }}
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Books</h2>
+            <ul>
+                <li v-for="book in books">
+                    <h3>Author: {{ book.author }}</h3>
+                    <p>Title: {{ book.title }}</p>
+                </li>
+            </ul>
+        </div>
+
+   </div> 
+
+   <script>
+       const app = Vue.createApp({
+           data() {
+               // create initial data
+               return {
+                    names: ["Billy", "Sally", "Tina"],
+                    books: [
+                        {author: "Joh Doe", title: "The path to Foo"},
+                        {author: "Sally May", title: "A life well spen"},
+                    ]
+               }
+           }
+       })
+
+       app.mount("#app")
+   </script>
+</body>
+</html>
