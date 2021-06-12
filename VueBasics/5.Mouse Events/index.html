@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+   <div id="orange">
+        <!-- Mouse Events -->
+        <!-- 
+            $event
+
+            $event is a special varaible that we can use when we want to pass
+            arguments to event handlers that include the event object and some
+            other data.
+         -->
+        <div class="box" v-on:mouseover="handleEvent">mouseover (enter)</div>
+        <div class="box" v-on:mouseleave="handleEvent">mouseleave</div>
+        <div class="box" v-on:dblclick="handleEvent($event, 21)">double click</div>
+        <div class="box" @mousemove="handleMouseMove">{{ x }} , {{ y }}</div>
+   </div>
+   
+   <style>
+       .box {
+           padding: 100px 0;
+           width: 400px;
+           text-align: center;
+           background-color: #ddd;
+           margin: 20px;
+           display: inline-block;
+
+       }
+   </style>
+
+   <script>
+       const app = Vue.createApp({
+           data(){
+               // create init data
+               return {
+                    x: 0,
+                    y: 0
+               }
+           },
+           methods: {
+               // create methods to be use
+               handleEvent(e, num) {
+                   console.log("EVENT", e)
+                   console.log("Event fired");
+
+                   // check for num, since not all bindings will pass num
+                   if(num) console.log(num);
+               },
+               handleMouseMove(e) {
+                   this.x = e.offsetX
+                   this.y = e.offsetY
+               }
+           }
+       })
+
+       app.mount("#orange")
+   </script>
+</body>
+</html>
