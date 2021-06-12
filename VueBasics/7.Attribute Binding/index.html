@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+   <div id="root">
+        <!-- 
+            Attribute Binding
+
+            Attribute binding is when we bind dynamic values
+            to our HTML attributes
+
+            V-bind / :
+
+            v-bind is a directive that allows us to bind (dynamic) values
+            to our HTML attributes on the page. the **:** symbol is a short
+            hand for v-bind
+         -->
+         <div>
+             <a v-bind:href="url">Link to YouTube</a>
+         </div>
+
+         <div>
+             <h2>Photos</h2>
+             <div class="img-container">
+                 <img v-for="url in urls" :src="url" alt="Unsplash Image">
+             </div>
+         </div>
+   </div> 
+
+   <script>
+       const app = Vue.createApp({
+           data() {
+               // initial data
+               return {
+                   urls: [
+                       "https://images.unsplash.com/photo-1621234860067-77cdeed403c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzkxMTB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM1Mzk1ODU&ixlib=rb-1.2.1&q=80&w=400",
+                       "https://images.unsplash.com/profile-1621235366757-6b4df1ff60cdimage?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32",
+                       "https://images.unsplash.com/photo-1622837633469-ee5b894a4f59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzkxMTB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM1Mzk1ODU&ixlib=rb-1.2.1&q=80&w=400",
+                       "https://images.unsplash.com/profile-1580308822413-186fa4a0a3b9image?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32",
+                        "https://images.unsplash.com/photo-1623073284837-0f2ab63c5e16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzkxMTB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM1Mzk1ODU&ixlib=rb-1.2.1&q=80&w=400"
+                   ] 
+               }
+           }
+       })
+
+       app.mount("#root")
+   </script>
+</body>
+</html>
