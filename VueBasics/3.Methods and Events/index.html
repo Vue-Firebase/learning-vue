@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+   <div id="app">
+       <h2>Title: {{ title }}</h2>
+       <p>Author: {{ author }}</p>
+       <p>Age: {{ age }}</p>
+
+       <!-- 
+           v-on / @
+
+           v-on is a directive we can use to bind to events. Anything
+           within the ""'s is where we can write valid JS.
+
+           v-* indicates a Vue directive
+
+           we can set values directly or call on functions to then
+           handle the event action for us
+
+           the @ symbol is a shorthand for v-on.
+        -->
+       <button v-on:click="age++">Inc Age</button>
+       <button v-on:click="decAge">Dec Age</button>
+   </div> 
+
+   <script>
+       const app = Vue.createApp({
+           data() {
+               return {
+                   title: "The Final Empire",
+                   author: "Brandon Sanderson",
+                   age: "45"
+               }
+           },
+           methods: {
+               decAge() {
+                //    access the **age** created in the data method
+                   this.age = this.age - 1;
+               }
+           }
+       })
+
+       app.mount("#app")
+   </script>
+</body>
+</html>
