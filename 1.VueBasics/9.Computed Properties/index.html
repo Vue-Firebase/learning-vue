@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Vue</title>
+  <script src="https://unpkg.com/vue@3.0.0"></script>
+  <style>
+    body{
+      background: #eee;
+      max-width: 960px;
+      margin: 20px auto;
+    }
+    p, h3, ul{
+      margin: 0;
+      padding: 0;
+    }
+    li{
+      list-style-type: none;
+      background: #fff;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    li.fav{
+      background: #ff9ed2;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    Computed Properties
+
+    A computed property is a way for us to define a data property inside
+    of our component that is dependent of other component data.
+   
+    Computed properties are a way to define **data** properties, their value
+    just depends on the result, of some operation preformed on other data
+    within the component.
+
+    here we **compute** / figure out the number of fav books, based on
+    the count of books where the field .isFav is true
+   -->
+  <div id="app">
+    <h2>Favorite Books Count {{ favBooksCount }}</h2>
+    <div v-if="showBooks">
+      <ul>
+        <li v-for="book in books" @click="toggleFav(book)" :class="{ fav: book.isFav }">
+          <img :src="book.img" :alt="book.title">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <p>Click the button below to show books</p>
+    </div>
+    
+    <button @click="toggleShowBooks">
+      <span v-if="showBooks">Hide books</span>
+      <span v-else>Show books</span>
+    </button>
+  </div>
+
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          showBooks: true,
+          books: [
+            { title: 'name of the wind', author: 'patrick rothfuss', img: 'assets/1.jpg', isFav: true },
+            { title: 'the way of kings', author: 'brandon sanderson', img: 'assets/2.jpg', isFav: false },
+            { title: 'the final empire', author: 'brandon sanderson', img: 'assets/3.jpg', isFav: true },
+          ],
+        }
+      },
+      methods: {
+        toggleShowBooks() {
+          this.showBooks =  !this.showBooks
+        },
+        toggleFav(book) {
+          book.isFav = !book.isFav
+        }
+      },
+      computed: {
+        favBooksCount() {
+          return this.books.reduce((acc, book) => {
+            if(book.isFav) {
+              acc += 1
+            }
+
+            return acc
+          }, 0)
+        }
+      }
+    })
+
+    app.mount('#app')
+
+  </script>
+</body>
+</html>
